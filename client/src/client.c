@@ -17,8 +17,7 @@ int main(void)
 	logger = iniciar_logger();
 
 	// Usando el logger creado previamente
-	// Escribi: "Hola! Soy un log"
-
+	log_info(logger, "Hola! Soy un log");
 
 	/* ---------------- ARCHIVOS DE CONFIGURACION ---------------- */
 
@@ -26,9 +25,16 @@ int main(void)
 
 	// Usando el config creado previamente, leemos los valores del config y los 
 	// dejamos en las variables 'ip', 'puerto' y 'valor'
+	ip = config_get_string_value(config, "IP");
+	puerto = config_get_string_value(config, "PUERTO");
+	valor = config_get_string_value(config, "VALOR");
+
+	config_destroy(config);
 
 	// Loggeamos el valor de config
-
+	log_info(logger, ip);
+	log_info(logger, puerto);
+	log_info(logger, valor);
 
 	/* ---------------- LEER DE CONSOLA ---------------- */
 
@@ -50,18 +56,23 @@ int main(void)
 
 	/*---------------------------------------------------PARTE 5-------------------------------------------------------------*/
 	// Proximamente
+
+	log_destroy(logger);
 }
 
 t_log* iniciar_logger(void)
 {
-	t_log* nuevo_logger;
+	t_log* nuevo_logger = log_create("tp0.log", "TP0", true, 2); 
 
 	return nuevo_logger;
 }
 
 t_config* iniciar_config(void)
 {
-	t_config* nuevo_config;
+	t_config* nuevo_config = config_create("cliente.config");
+	if (nuevo_config == NULL) {
+		exit(0);
+	}
 
 	return nuevo_config;
 }
@@ -70,11 +81,16 @@ void leer_consola(t_log* logger)
 {
 	char* leido;
 
-	// La primera te la dejo de yapa
-	leido = readline("> ");
-
 	// El resto, las vamos leyendo y logueando hasta recibir un string vacío
-
+	while (true) {
+		leido = readline("> ");
+		if (strcmp(leido, "")) {
+			free(leido); // liberamos memoria
+			break; // salimos del loop 
+		}
+		log_info(logger, leido);
+		free(leido);
+	}
 
 	// ¡No te olvides de liberar las lineas antes de regresar!
 
