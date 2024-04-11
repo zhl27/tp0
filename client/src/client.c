@@ -30,16 +30,17 @@ int main(void)
 	valor = config_get_string_value(config, "CLAVE");
 
 	// Loggeamos el valor de config
-	log_info(logger, ip);
-	log_info(logger, puerto);
-	log_info(logger, valor);
+	log_info(logger, "El valor de ip es: %s", ip);
+	log_info(logger, "El valor de puerto es: %s", puerto);
+	log_info(logger, "El valor de valor es: %s", valor);
 
 	/* ---------------- LEER DE CONSOLA ---------------- */
 
-	//leer_consola(logger);
+	leer_consola(logger);
 
 	/*---------------------------------------------------PARTE 3-------------------------------------------------------------*/
 
+	puts("\nPARTE 3\n");
 	// ADVERTENCIA: Antes de continuar, tenemos que asegurarnos que el servidor esté corriendo para poder conectarnos a él
 
 	// Creamos una conexión hacia el servidor
