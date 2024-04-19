@@ -1,5 +1,6 @@
 #include "utils.h"
 
+t_log* logger;
 
 void* serializar_paquete(t_paquete* paquete, int bytes)
 {
@@ -62,6 +63,7 @@ void enviar_mensaje(char* mensaje, int socket_cliente)
 	void* a_enviar = serializar_paquete(paquete, bytes);
 
 	send(socket_cliente, a_enviar, bytes, 0);
+	log_info(logger, "Envie el mensaje: %s", mensaje);
 
 	free(a_enviar);
 	eliminar_paquete(paquete);
@@ -115,3 +117,21 @@ void liberar_conexion(int socket_cliente)
 	close(socket_cliente);
 }
 
+void* recibir_buffer(int* size, int socket_cliente)
+{
+	void * buffer;
+
+	recv(socket_cliente, size, sizeof(int), MSG_WAITALL);
+	buffer = malloc(*size);
+	recv(socket_cliente, buffer, *size, MSG_WAITALL);
+
+	return buffer;
+}
+
+void recibir_mensaje(int socket_cliente)
+{
+	int size;
+	char* buffer = recibir_buffer(&size, socket_cliente);
+	log_info(logger, "Me llego el mensaje: %s", buffer);
+	free(buffer);
+}

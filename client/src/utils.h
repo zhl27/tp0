@@ -28,7 +28,7 @@ typedef struct
 	t_buffer* buffer;
 } t_paquete;
 
-
+extern t_log* logger;
 
 int crear_conexion(char* ip, char* puerto);
 void enviar_mensaje(char* mensaje, int socket_cliente);
@@ -37,5 +37,7 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
+void* recibir_buffer(int*, int);
+void recibir_mensaje(int);
 
 #endif /* UTILS_H_ */

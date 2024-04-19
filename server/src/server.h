@@ -7,6 +7,7 @@
 #include <commons/log.h>
 #include "utils.h"
 
+void *atender_cliente(int);
 void iterator(char* value);
 
 #endif /* SERVER_H_ */
