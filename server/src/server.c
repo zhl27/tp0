@@ -26,7 +26,7 @@ void *atender_cliente(int cliente_fd){
 		switch (cod_op) {
 			case MENSAJE:
 				recibir_mensaje(cliente_fd);
-				enviar_mensaje("Respuesta del server!!!",cliente_fd);
+				enviar_mensaje("Respuesta del server",cliente_fd);
 				break;
 			case PAQUETE:
 				lista = recibir_paquete(cliente_fd);

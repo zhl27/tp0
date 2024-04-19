@@ -38,7 +38,10 @@ void agregar_a_paquete(t_paquete* paquete, void* valor, int tamanio);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void liberar_conexion(int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
+
 void* recibir_buffer(int*, int);
 void recibir_mensaje(int);
+int recibir_operacion(int);
+
 
 #endif /* UTILS_H_ */
