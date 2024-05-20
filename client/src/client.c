@@ -35,7 +35,7 @@ int main(void)
 
 	// Enviamos al servidor el valor de CLAVE como mensaje
 	enviar_mensaje(valor, conexion);
-	int cod_op = recibir_operacion(conexion);
+	int cod_op = recibir_operacion(conexion); // en este caso no nos importa saber el cod_op pero usamos la funcion esta para reciclar código.
 	recibir_mensaje(conexion);
 	
 	// Armamos y enviamos el paquete
